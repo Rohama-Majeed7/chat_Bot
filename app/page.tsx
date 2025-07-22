@@ -104,7 +104,7 @@ export default function Chat() {
                   <X size={20} />
                 </Button>
               </CardHeader>
-              <ScrollArea className="p-4 self-start">
+              <ScrollArea className="p-4 ">
                 {messages?.length === 0 && (
                   <div className="text-center text-gray-500">
                     No Messages Yet
