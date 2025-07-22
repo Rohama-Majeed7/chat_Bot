@@ -1,16 +1,14 @@
 "use client";
-import { useState, useEffect, useRef, use } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardHeader,
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
-import type { Components } from "react-markdown";
 
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -130,10 +128,9 @@ export default function Chat() {
                         children={message.content}
                         remarkPlugins={[remarkGfm]}
                         components={{
-                          code(props: any) {
-                            const { inline, className, children, ...rest } =
-                              props;
-                            if (inline) {
+                          code({ node, className, children, ...rest }) {
+                            const isInline = className?.includes("inline");
+                            if (isInline) {
                               return (
                                 <code className="bg-gray-200 rounded px-1">
                                   {children}
@@ -144,7 +141,6 @@ export default function Chat() {
                             return (
                               <pre
                                 className="bg-gray-200 rounded px-1 overflow-x-auto"
-                                {...rest}
                               >
                                 {children}
                               </pre>
